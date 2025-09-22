@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import ChatbotIcon from "./Components/ChatbotIcon"
 import ChatForm from "./Components/ChatForm"
 import ChatMessage from "./Components/chatMessage.jsx"
@@ -5,6 +6,14 @@ import ChatMessage from "./Components/chatMessage.jsx"
 
 const App = () => {
   const [chathistory, setChatHistory] = useState([]);
+=======
+import { useState }from "react";
+import ChatbotIcon from "./Components/ChatbotIcon";
+import ChatMessage from "./Components/CahatMessage";
+import ChatForm from "./Components/ChatForm";
+
+const App = () => {
+>>>>>>> Stashed changes
 
   return (
     <div className="container">
