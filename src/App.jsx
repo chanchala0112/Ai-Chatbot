@@ -7,6 +7,27 @@ import ChatForm from "./Components/chatform";
 const App = () => {
   const [chathistory, setChatHistory] = useState([]);
 
+  const generateBotReponse = async(history) => {
+    //format chat history for API request
+      history = history.map(({ role, text }) => ({ role, parts: [{ text }] }));
+
+    const requestoptions = {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({contents: history})
+    }
+
+    //Make the API call to get the bot's respondse
+    try{
+      const response = await fetch(import.meta.env.VITE_API_URL, requestoptions);
+      const data = await response.json();
+      if(!response.ok) throw new Error(data.error.message || "Something went wrong");
+      console.log();
+    }catch(error){
+      console.log(error);
+    }
+
+  };
   return (
     <div className="container">
       <div className="chatbot-poppup">
@@ -42,7 +63,7 @@ const App = () => {
 
         {/*Chatbot Footer*/}
         <div className="chat-footer">
-          <ChatForm setChatHistory={setChatHistory}/>
+          <ChatForm chathistory={chathistory} setChatHistory={setChatHistory} generateBotReponse={generateBotReponse}/>
         </div>
       
     </div>
