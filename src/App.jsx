@@ -8,6 +8,12 @@ const App = () => {
   const [chathistory, setChatHistory] = useState([]);
 
   const generateBotReponse = async(history) => {
+    //Helper Function update history
+    const updateHistory = (text) => { 
+      setChatHistory((prev) => [...prev.filter((msg) => msg.text !== "Thinking..."), { role: "model",
+      text }]);
+    }
+
     //format chat history for API request
       history = history.map(({ role, text }) => ({ role, parts: [{ text }] }));
 
@@ -19,11 +25,13 @@ const App = () => {
 
     //Make the API call to get the bot's respondse
     try{
-       console.log("API URL:", import.meta.env.VITE_API_URL);
+      console.log("API URL:", import.meta.env.VITE_API_URL);
       const response = await fetch(import.meta.env.VITE_API_URL, requestoptions);
       const data = await response.json();
       if(!response.ok) throw new Error(data.error.message || "Something went wrong");
-      console.log(data);
+      
+       const apiResponseText = data.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, "$1").trim();
+       updateHistory(apiResponseText);
     }catch(error){
       console.log(error);
     }
