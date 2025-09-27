@@ -19,10 +19,11 @@ const App = () => {
 
     //Make the API call to get the bot's respondse
     try{
+       console.log("API URL:", import.meta.env.VITE_API_URL);
       const response = await fetch(import.meta.env.VITE_API_URL, requestoptions);
       const data = await response.json();
       if(!response.ok) throw new Error(data.error.message || "Something went wrong");
-      console.log();
+      console.log(data);
     }catch(error){
       console.log(error);
     }
