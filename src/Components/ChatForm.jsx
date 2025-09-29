@@ -16,15 +16,14 @@ const ChatForm = ({ chathistory, setChatHistory , generateBotReponse}) => {
     ]);
 
     // Add thinking placeholder for the bot's respondse
-    setTimeout(() => {
+    setTimeout(() => 
       setChatHistory((history) => [
         ...history,
-        { role: "model", text: "Thinking.." }
-      ])
+        { role: "model", text: "Thinking..." }
+       ]), 600);
 
       //Call the function to generate the bot's respondse
       generateBotReponse([...chathistory , { role: "user", text: userMessage }]);
-    } , 600);
   };
 
   return (
