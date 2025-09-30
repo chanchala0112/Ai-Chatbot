@@ -24,7 +24,7 @@ const ChatForm = ({ chathistory, setChatHistory , generateBotReponse}) => {
        ]);
 
       //Call the function to generate the bot's respondse
-      generateBotReponse([...chathistory , { role: "user", text:userMessage }]);
+      generateBotReponse([...chathistory , { role: "user", text: userMessage }]);
   }, 600);
   };
 
