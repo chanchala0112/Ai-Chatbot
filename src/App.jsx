@@ -5,7 +5,7 @@ import ChatForm from "./Components/ChatForm";
 
 const App = () => {
   const [chathistory, setChatHistory] = useState([]);
-   const [showChatbot, setShowChatbot] = useState([false]); // boolean, not array
+   const [showChatbot, setShowChatbot] = useState((false)); // boolean, not array
   const chatBodyRef = useRef();
 
   const generateBotReponse = async(history) => {
@@ -36,6 +36,7 @@ const App = () => {
        updateHistory(apiResponseText);
     }catch(error){
       updateHistory(error.message, true);
+      
     }
 
   };
